@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinDesktop", "MoinDesktop\MoinDesktop.csproj", "{DB93833C-3872-4555-8FDE-FADA7F9FE086}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MoinWS", "http://localhost:2795", "{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}"
+	ProjectSection(WebsiteProperties) = preProject
+		UseIISExpress = "true"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_2795"
+		Debug.AspNetCompiler.PhysicalPath = "MoinWS\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2795\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_2795"
+		Release.AspNetCompiler.PhysicalPath = "MoinWS\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2795\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "MoinWS\"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinClasses", "MoinClasses\MoinClasses.csproj", "{394D57E0-2943-4701-BD13-7137BC11B543}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinDBTool", "MoinDBTool\MoinDBTool.csproj", "{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB93833C-3872-4555-8FDE-FADA7F9FE086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB93833C-3872-4555-8FDE-FADA7F9FE086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB93833C-3872-4555-8FDE-FADA7F9FE086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB93833C-3872-4555-8FDE-FADA7F9FE086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{394D57E0-2943-4701-BD13-7137BC11B543}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{394D57E0-2943-4701-BD13-7137BC11B543}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{394D57E0-2943-4701-BD13-7137BC11B543}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{394D57E0-2943-4701-BD13-7137BC11B543}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

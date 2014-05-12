@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="MoinWS" CodeBehind="~/App_Code/Service.cs" %>
