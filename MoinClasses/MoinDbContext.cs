@@ -12,12 +12,12 @@ namespace MoinClasses
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class MoinDbContext : DbContext
     {
+        
         public DbSet<Customers> Customers { get; set; }
         public DbSet<Users> Users { get; set; }
 
         public MoinDbContext() : base()
         {
-
         }
 
         // Constructor to use on a DbConnection that is already opened

@@ -4,11 +4,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinDesktop", "MoinDesktop\MoinDesktop.csproj", "{DB93833C-3872-4555-8FDE-FADA7F9FE086}"
+	ProjectSection(ProjectDependencies) = postProject
+		{70C405EC-7AEA-4D12-A12A-B3A842CE11D6} = {70C405EC-7AEA-4D12-A12A-B3A842CE11D6}
+	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MoinWS", "http://localhost:2795", "{70C405EC-7AEA-4D12-A12A-B3A842CE11D6}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{394d57e0-2943-4701-bd13-7137bc11b543}|MoinClasses.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_2795"
 		Debug.AspNetCompiler.PhysicalPath = "MoinWS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2795\"

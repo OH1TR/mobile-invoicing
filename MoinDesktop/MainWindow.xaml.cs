@@ -24,5 +24,11 @@ namespace MoinDesktop
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MoinWSRef.MoinWSClient c = new MoinWSRef.MoinWSClient();
+            MoinClasses.Customers[] cust=c.GetCustomers();
+        }
     }
 }
