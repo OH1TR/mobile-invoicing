@@ -20,14 +20,6 @@ public class MoinWS : IMoinWS
         throw new UnauthorizedAccessException("User not in role:" + role);
     }
 
-    protected Customers CurrentCustomer
-    {
-        get
-        {
-            return (((MoinClasses.MoanIdentity)((System.Web.HttpContext.Current.User).Identity)).Customer);
-        }
-    }
-
     protected MoinDbContext GetCtx()
     {
         string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
@@ -38,32 +30,25 @@ public class MoinWS : IMoinWS
 
     public Customers GetCurrentCustomer()
     {
-        return (CurrentCustomer);
+        using (MoanServiceContext sc = new MoanServiceContext())
+        {
+            return (sc.CurrentCustomer);
+        }
     }
 
 
     public Users GetUsers(string customerID)
     {
-        //DemandRole("ManageUsers");
-
         try
         {
-            object propObj;
-
-            OperationContext.Current.IncomingMessageProperties.TryGetValue(HttpRequestMessageProperty.Name, out propObj);
-
-            HttpRequestMessageProperty reqProp = (HttpRequestMessageProperty)propObj;
-            string headerAuth = reqProp.Headers["Authorization"];
-            System.IO.File.WriteAllText("/tmp/auth.txt", headerAuth);
-
-            using (MoinDbContext ctx = GetCtx())
+            using (MoanServiceContext sc = new MoanServiceContext())
             {
-                ctx.Configuration.ProxyCreationEnabled = false;
+                sc.ctx.Configuration.ProxyCreationEnabled = false;
 
-                if (CurrentCustomer.ID == customerID)
+                if (sc.CurrentCustomer.ID == customerID)
                 {
-                    var users = from u in ctx.Users
-                                where u.CustomerID == CurrentCustomer.ID
+                    var users = from u in sc.ctx.Users
+                                where u.CustomerID == sc.CurrentCustomer.ID
                                 select u;
                     Users[] retval = users.ToArray();
                     return (retval[0]);
@@ -79,19 +64,9 @@ public class MoinWS : IMoinWS
             }*/
             }
         }
-        catch(Exception e)
-        {            
-            string s="";
-            if(System.Web.HttpContext.Current==null)
-                s+="System.Web.HttpContext.Current==null";
-            else
-                if(System.Web.HttpContext.Current.User==null)
-                    s+="System.Web.HttpContext.Current.User==null";
-                else
-                    s+="User:"+System.Web.HttpContext.Current.User.ToString();
-
-
-            System.IO.File.WriteAllText("/tmp/ex.txt", e.Message + e.StackTrace+s);
+        catch (Exception e)
+        {
+            System.IO.File.WriteAllText("/tmp/ex.txt", e.Message + e.StackTrace);
         }
         return (null);
     }

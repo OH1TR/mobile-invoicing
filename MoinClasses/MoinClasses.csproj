@@ -46,9 +46,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -58,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorizationPolicy.cs" />
+    <Compile Include="MoanServiceContext.cs" />
     <Compile Include="Tables\Permissions.cs" />
     <Compile Include="Tables\PermissionsInRoles.cs" />
     <Compile Include="Tables\Roles.cs" />
