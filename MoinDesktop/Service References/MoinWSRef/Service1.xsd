@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MoinClasses" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MoinClasses" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfCustomers">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customers" nillable="true" type="tns:Customers" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfCustomers" nillable="true" type="tns:ArrayOfCustomers" />
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/MoinClasses.Tables" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/MoinClasses.Tables" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="Customers">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:MoinClassesBase">
@@ -18,7 +12,7 @@
   <xs:element name="Customers" nillable="true" type="tns:Customers" />
   <xs:complexType name="MoinClassesBase">
     <xs:sequence>
-      <xs:element minOccurs="0" name="RID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RowState" type="tns:MoinRowState" />
     </xs:sequence>
   </xs:complexType>
@@ -32,4 +26,22 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="MoinRowState" nillable="true" type="tns:MoinRowState" />
+  <xs:complexType name="ArrayOfCustomers">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customers" nillable="true" type="tns:Customers" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomers" nillable="true" type="tns:ArrayOfCustomers" />
+  <xs:complexType name="Users">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:MoinClassesBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CustomerID" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="PasswordHash" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Users" nillable="true" type="tns:Users" />
 </xs:schema>

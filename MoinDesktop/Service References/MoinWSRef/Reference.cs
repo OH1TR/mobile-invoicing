@@ -15,11 +15,23 @@ namespace MoinDesktop.MoinWSRef {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="MoinWSRef.IMoinWS")]
     public interface IMoinWS {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetCustomers", ReplyAction="http://tempuri.org/IMoinWS/GetCustomersResponse")]
-        MoinClasses.Customers[] GetCustomers();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetCurrentCustomer", ReplyAction="http://tempuri.org/IMoinWS/GetCurrentCustomerResponse")]
+        MoinClasses.Tables.Customers GetCurrentCustomer();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetCurrentCustomer", ReplyAction="http://tempuri.org/IMoinWS/GetCurrentCustomerResponse")]
+        System.Threading.Tasks.Task<MoinClasses.Tables.Customers> GetCurrentCustomerAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetCustomers", ReplyAction="http://tempuri.org/IMoinWS/GetCustomersResponse")]
-        System.Threading.Tasks.Task<MoinClasses.Customers[]> GetCustomersAsync();
+        MoinClasses.Tables.Customers[] GetCustomers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetCustomers", ReplyAction="http://tempuri.org/IMoinWS/GetCustomersResponse")]
+        System.Threading.Tasks.Task<MoinClasses.Tables.Customers[]> GetCustomersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetUsers", ReplyAction="http://tempuri.org/IMoinWS/GetUsersResponse")]
+        MoinClasses.Tables.Users GetUsers(string customerID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetUsers", ReplyAction="http://tempuri.org/IMoinWS/GetUsersResponse")]
+        System.Threading.Tasks.Task<MoinClasses.Tables.Users> GetUsersAsync(string customerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +61,28 @@ namespace MoinDesktop.MoinWSRef {
                 base(binding, remoteAddress) {
         }
         
-        public MoinClasses.Customers[] GetCustomers() {
+        public MoinClasses.Tables.Customers GetCurrentCustomer() {
+            return base.Channel.GetCurrentCustomer();
+        }
+        
+        public System.Threading.Tasks.Task<MoinClasses.Tables.Customers> GetCurrentCustomerAsync() {
+            return base.Channel.GetCurrentCustomerAsync();
+        }
+        
+        public MoinClasses.Tables.Customers[] GetCustomers() {
             return base.Channel.GetCustomers();
         }
         
-        public System.Threading.Tasks.Task<MoinClasses.Customers[]> GetCustomersAsync() {
+        public System.Threading.Tasks.Task<MoinClasses.Tables.Customers[]> GetCustomersAsync() {
             return base.Channel.GetCustomersAsync();
+        }
+        
+        public MoinClasses.Tables.Users GetUsers(string customerID) {
+            return base.Channel.GetUsers(customerID);
+        }
+        
+        public System.Threading.Tasks.Task<MoinClasses.Tables.Users> GetUsersAsync(string customerID) {
+            return base.Channel.GetUsersAsync(customerID);
         }
     }
 }

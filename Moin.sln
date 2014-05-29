@@ -12,7 +12,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "MoinWS", "http://localhost:
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
-		ProjectReferences = "{394d57e0-2943-4701-bd13-7137bc11b543}|MoinClasses.dll;"
+		ProjectReferences = "{394d57e0-2943-4701-bd13-7137bc11b543}|MoinClasses.dll;{92558102-9dc9-4390-996e-de7f5b2c96ef}|MoinAuthenticationModule.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_2795"
 		Debug.AspNetCompiler.PhysicalPath = "MoinWS\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2795\"
@@ -33,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinClasses", "MoinClasses\MoinClasses.csproj", "{394D57E0-2943-4701-BD13-7137BC11B543}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinDBTool", "MoinDBTool\MoinDBTool.csproj", "{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinAuthenticationModule", "MoinAuthenticationModule\MoinAuthenticationModule.csproj", "{92558102-9DC9-4390-996E-DE7F5B2C96EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +58,10 @@ Global
 		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDFB7BF0-7E9F-41A6-92F1-6C21F075999D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92558102-9DC9-4390-996E-DE7F5B2C96EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92558102-9DC9-4390-996E-DE7F5B2C96EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92558102-9DC9-4390-996E-DE7F5B2C96EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92558102-9DC9-4390-996E-DE7F5B2C96EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

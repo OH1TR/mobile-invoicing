@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomEndpointBehavior.cs" />
     <Compile Include="Service References\MoinWSRef\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -100,6 +101,8 @@
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MoinClasses.Customers.datasource" />
+    <None Include="Properties\DataSources\MoinClasses.Tables.Customers.datasource" />
+    <None Include="Properties\DataSources\MoinClasses.Tables.Users.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -117,7 +120,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

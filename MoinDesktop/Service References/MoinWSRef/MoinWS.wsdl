@@ -4,25 +4,63 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:2795/Service.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:2795/Service.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:2795/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MoinClasses" />
+      <xsd:import schemaLocation="http://localhost:2795/Service.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MoinClasses.Tables" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IMoinWS_GetCurrentCustomer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentCustomer" />
+  </wsdl:message>
+  <wsdl:message name="IMoinWS_GetCurrentCustomer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentCustomerResponse" />
+  </wsdl:message>
   <wsdl:message name="IMoinWS_GetCustomers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomers" />
   </wsdl:message>
   <wsdl:message name="IMoinWS_GetCustomers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetCustomersResponse" />
   </wsdl:message>
+  <wsdl:message name="IMoinWS_GetUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsers" />
+  </wsdl:message>
+  <wsdl:message name="IMoinWS_GetUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMoinWS">
+    <wsdl:operation name="GetCurrentCustomer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMoinWS/GetCurrentCustomer" message="tns:IMoinWS_GetCurrentCustomer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMoinWS/GetCurrentCustomerResponse" message="tns:IMoinWS_GetCurrentCustomer_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <wsdl:input wsaw:Action="http://tempuri.org/IMoinWS/GetCustomers" message="tns:IMoinWS_GetCustomers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMoinWS/GetCustomersResponse" message="tns:IMoinWS_GetCustomers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMoinWS/GetUsers" message="tns:IMoinWS_GetUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMoinWS/GetUsersResponse" message="tns:IMoinWS_GetUsers_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IMoinWS" type="tns:IMoinWS">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetCurrentCustomer">
+      <soap:operation soapAction="http://tempuri.org/IMoinWS/GetCurrentCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetCustomers">
       <soap:operation soapAction="http://tempuri.org/IMoinWS/GetCustomers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsers">
+      <soap:operation soapAction="http://tempuri.org/IMoinWS/GetUsers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
