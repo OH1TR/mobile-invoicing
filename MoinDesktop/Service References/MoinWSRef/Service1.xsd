@@ -32,6 +32,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCustomers" nillable="true" type="tns:ArrayOfCustomers" />
+  <xs:complexType name="ArrayOfUsers">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Users" nillable="true" type="tns:Users" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUsers" nillable="true" type="tns:ArrayOfUsers" />
   <xs:complexType name="Users">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:MoinClassesBase">

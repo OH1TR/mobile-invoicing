@@ -17,6 +17,6 @@ public interface IMoinWS
     Customers[] GetCustomers();
 
     [OperationContract]
-    Users GetUsers(string customerID);
+    Users[] GetUsers(string customerID);
 }
 

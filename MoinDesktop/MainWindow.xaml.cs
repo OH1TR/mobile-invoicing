@@ -46,7 +46,7 @@ namespace MoinDesktop
                 */
                
                 //Customers cu = c.GetCurrentCustomer();
-                MoinClasses.Tables.Users u = c.GetUsers("75cb1a81-8994-4a93-a3d6-be0d832ee365"); //cu.ID);
+                MoinClasses.Tables.Users[] u = c.GetUsers("75cb1a81-8994-4a93-a3d6-be0d832ee365"); //cu.ID);
             }
             catch(Exception ex)
             {

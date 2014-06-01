@@ -59,13 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthorizationPolicy.cs" />
     <Compile Include="MoanServiceContext.cs" />
+    <Compile Include="Permission.cs" />
     <Compile Include="Tables\Permissions.cs" />
     <Compile Include="Tables\PermissionsInRoles.cs" />
     <Compile Include="Tables\Roles.cs" />
     <Compile Include="Tables\UsersInRoles.cs" />
-    <Compile Include="MoanPrincipal.cs" />
     <Compile Include="Tables\Customers.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Tables\MoinClassesBase.cs" />

@@ -9,25 +9,9 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
-[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
+//[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
 public class MoinWS : IMoinWS
 {
-    protected void DemandRole(string role)
-    {
-        if (System.Web.HttpContext.Current.User.IsInRole(role))
-            return;
-
-        throw new UnauthorizedAccessException("User not in role:" + role);
-    }
-
-    protected MoinDbContext GetCtx()
-    {
-        string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
-        MySqlConnection connection = new MySqlConnection(connectionString);
-        MoinDbContext ctx = new MoinDbContext(connection, false);
-        return (ctx);
-    }
-
     public Customers GetCurrentCustomer()
     {
         using (MoanServiceContext sc = new MoanServiceContext())
@@ -36,13 +20,14 @@ public class MoinWS : IMoinWS
         }
     }
 
-
-    public Users GetUsers(string customerID)
+    public Users[] GetUsers(string customerID)
     {
         try
         {
             using (MoanServiceContext sc = new MoanServiceContext())
             {
+                sc.DemandPermission(Permission.ManageUsers);
+
                 sc.ctx.Configuration.ProxyCreationEnabled = false;
 
                 if (sc.CurrentCustomer.ID == customerID)
@@ -51,46 +36,64 @@ public class MoinWS : IMoinWS
                                 where u.CustomerID == sc.CurrentCustomer.ID
                                 select u;
                     Users[] retval = users.ToArray();
-                    return (retval[0]);
+                    return (retval);
                 }
-                /*
-            else
-            {
-                DemandRole("Developer");
-                var users = from u in ctx.Users
-                            where u.CustomerID == customerID
-                            select u;
-                return (users.ToArray());
-            }*/
+                else
+                {
+                    sc.DemandPermission(Permission.SystemAdmin);
+
+                    var users = from u in sc.ctx.Users
+                                where u.CustomerID == customerID
+                                select u;
+                    return (users.ToArray());
+                }
             }
         }
         catch (Exception e)
         {
-            System.IO.File.WriteAllText("/tmp/ex.txt", e.Message + e.StackTrace);
+            Log.Exception(e);
         }
         return (null);
     }
-
+    
 
     public Customers[] GetCustomers()
     {
-        DemandRole("Developer");
         try
         {
-            string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
-
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MoanServiceContext sc = new MoanServiceContext())
             {
-                using (MoinDbContext contextDB = new MoinDbContext(connection, false))
-                {
-                    return (contextDB.Set<Customers>().ToArray());
-                }
+                sc.DemandPermission(Permission.SystemAdmin);
+
+                return (sc.ctx.Set<Customers>().ToArray());
             }
         }
-        catch (Exception ex)
+        catch (Exception e)
         {
-            System.IO.File.WriteAllText("/tmp/exception.txt", ex.Message + ex.StackTrace + (ex.InnerException != null ? ex.InnerException.Message : ""));
+            Log.Exception(e);
         }
         return (null);
     }
+
+
+/* function template
+    public x[] x()
+    {
+        try
+        {
+            using (MoanServiceContext sc = new MoanServiceContext())
+            {
+
+                return ();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Exception(e);
+        }
+        return (null);
+    }
+*/
+
+
 }

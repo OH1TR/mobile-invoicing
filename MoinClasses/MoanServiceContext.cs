@@ -114,6 +114,13 @@ namespace MoinClasses
             return (false);
         }
 
+        public void DemandPermission(string permission)
+        {
+            if (_roles.Contains(permission))
+                return;
+            throw new Exception("User not in role " + permission);
+        }
+
         public virtual void Dispose()
         {
             ctx.Dispose();

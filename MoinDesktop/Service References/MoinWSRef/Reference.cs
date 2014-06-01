@@ -28,10 +28,10 @@ namespace MoinDesktop.MoinWSRef {
         System.Threading.Tasks.Task<MoinClasses.Tables.Customers[]> GetCustomersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetUsers", ReplyAction="http://tempuri.org/IMoinWS/GetUsersResponse")]
-        MoinClasses.Tables.Users GetUsers(string customerID);
+        MoinClasses.Tables.Users[] GetUsers(string customerID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMoinWS/GetUsers", ReplyAction="http://tempuri.org/IMoinWS/GetUsersResponse")]
-        System.Threading.Tasks.Task<MoinClasses.Tables.Users> GetUsersAsync(string customerID);
+        System.Threading.Tasks.Task<MoinClasses.Tables.Users[]> GetUsersAsync(string customerID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -77,11 +77,11 @@ namespace MoinDesktop.MoinWSRef {
             return base.Channel.GetCustomersAsync();
         }
         
-        public MoinClasses.Tables.Users GetUsers(string customerID) {
+        public MoinClasses.Tables.Users[] GetUsers(string customerID) {
             return base.Channel.GetUsers(customerID);
         }
         
-        public System.Threading.Tasks.Task<MoinClasses.Tables.Users> GetUsersAsync(string customerID) {
+        public System.Threading.Tasks.Task<MoinClasses.Tables.Users[]> GetUsersAsync(string customerID) {
             return base.Channel.GetUsersAsync(customerID);
         }
     }
