@@ -1,0 +1,22 @@
+﻿<#@ template debug="false" hostspecific="True" language="C#" #>
+<#@ assembly name="$(TargetDir)TypeLite.dll" #>
+<#@ assembly name="$(TargetDir)TypeLite.Net4.dll" #>
+<#@ assembly name="$(TargetDir)$(TargetFileName)" #>
+<#@ assembly name="$(SolutionDir)\MoinClasses\bin\Debug\MoinClasses.dll" #>
+
+<#@ import namespace="TypeLite" #> 
+<#@ import namespace="TypeLite.Net4" #> 
+<#@output extension=".d.ts"#>
+
+
+
+<# var ts = TypeScript.Definitions()
+		.For<MoinClasses.Tables.Customers>()
+		.For<MoinClasses.Tables.Users>()
+		;
+#>
+
+<#= ts.Generate(TsGeneratorOutput.Properties) #>
+
+
+<#= ts.Generate(TsGeneratorOutput.Enums) #>
