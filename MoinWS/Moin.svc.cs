@@ -24,7 +24,7 @@ namespace MoinWS
 
         public Users[] GetUsers(string customerID)
         {
-            try
+          try
             {
                 using (MoanServiceContext sc = new MoanServiceContext())
                 {
@@ -51,6 +51,7 @@ namespace MoinWS
                     }
                 }
             }
+               
             catch (Exception e)
             {
                 Log.Exception(e);

@@ -22,7 +22,12 @@ namespace MoinClasses
         {
             StackTrace st = new StackTrace(true);
             MethodBase method = st.GetFrame(1).GetMethod();
-            Trace.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss ") + method.DeclaringType.Name + "." + method.Name + " " + string.Format(format, args));
+            string str=DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss ") + method.DeclaringType.Name + "." + method.Name + " " + string.Format(format, args);
+
+            if (System.IO.Directory.Exists("/tmp"))
+                System.IO.File.AppendAllText("/tmp/moinlog.txt", str + "\r");
+
+            //Trace.WriteLine(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss ") + method.DeclaringType.Name + "." + method.Name + " " + string.Format(format, args));
         }
     }
 }

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Projects\mobile-invoicing\Published</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="bin/MoinClasses.dll">
+      <publishTime>09/16/2014 11:43:11</publishTime>
+    </File>
+    <File Include="bin/MoinClasses.pdb">
+      <publishTime>09/16/2014 11:43:11</publishTime>
+    </File>
+    <File Include="bin/MoinWS.dll">
+      <publishTime>09/16/2014 18:05:44</publishTime>
+    </File>
+    <File Include="bin/MoinWS.pdb">
+      <publishTime>09/16/2014 18:05:44</publishTime>
+    </File>
+    <File Include="bin/mysql.data.dll">
+      <publishTime>06/01/2014 14:51:47</publishTime>
+    </File>
+    <File Include="bin/mysql.data.entity.EF6.dll">
+      <publishTime>06/01/2014 14:51:51</publishTime>
+    </File>
+    <File Include="bin/TypeLite.dll">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="bin/TypeLite.Net4.dll">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="bin/TypeLite.Net4.pdb">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="bin/TypeLite.pdb">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="Moin.svc">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="Scripts/Manager.ttinclude">
+      <publishTime>09/15/2014 22:09:21</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/16/2014 17:38:59</publishTime>
+    </File>
+  </ItemGroup>
+</Project>
