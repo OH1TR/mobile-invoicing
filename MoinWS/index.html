@@ -1,9 +1,24 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="InvoiceApp">
 <head>
+    <script src="/Scripts/jquery-2.1.1.js"></script>
+    <script src="/Scripts/Classes.js"></script>
+    <script src="/Scripts/Main.js"></script>
+    <script src="/Scripts/angular.js"></script>
+    <script src="/Scripts/angular-route.js"></script>
+    <script src="/Scripts/Controllers.js"></script>
     <title></title>
 </head>
-<body>
-    Jihaa!!!
+<body onload="pageLoaded()" ng-controller="CustomersCtrl">
+    <header>
+        <ul ng-show="show" class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-home"></i> Login</a></li>
+            <li><a href="#home"><i class="fa fa-shield"></i> Home</a></li>            
+        </ul>
+    </header>
+
+    <div id="main">
+        <div ng-view></div>
+    </div>
 </body>
 </html>

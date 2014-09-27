@@ -30,13 +30,18 @@ namespace MoinClasses
             HttpRequestMessageProperty reqProp = (HttpRequestMessageProperty)propObj;
             string headerAuth = reqProp.Headers["Authorization"];
             if(!ProcessAuthenticationHeader(headerAuth))
-            {
+            {                
+                //OperationContext.Current.OutgoingMessageProperties.Add("WWW-Authenticate", "Basic realm=\"nmrs_m7VKmomQ2YM3:\"");
                 throw new Exception("Authentication failed");
             }
         }
 
         bool ProcessAuthenticationHeader(string header)
         {
+            
+            if (header == null)
+                return (false);
+
             header = header.Trim();
             if (header.IndexOf("Basic", 0) != 0)
             {
@@ -49,8 +54,10 @@ namespace MoinClasses
             string s = System.Text.Encoding.GetEncoding(28591).GetString(decodedBytes);
 
             string[] userPass = s.Split(new char[] { ':' });
+             
             string username = userPass[0];
             string password = userPass[1];
+
             string[] roles;
 
             Customers customer;

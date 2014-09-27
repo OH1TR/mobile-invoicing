@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinDesktop", "MoinDesktop\MoinDesktop.csproj", "{DB93833C-3872-4555-8FDE-FADA7F9FE086}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8} = {FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinClasses", "MoinClasses\MoinClasses.csproj", "{394D57E0-2943-4701-BD13-7137BC11B543}"
 EndProject
@@ -12,6 +15,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinServer", "MoinServer\MoinServer.csproj", "{9E0E1BF0-B69C-4736-A6FC-03FC24938F3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinWS", "MoinWS\MoinWS.csproj", "{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSGenerator", "TSGenerator\TSGenerator.csproj", "{899ACE29-B236-4779-9184-60E3FAA2CD39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +44,10 @@ Global
 		{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{899ACE29-B236-4779-9184-60E3FAA2CD39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{899ACE29-B236-4779-9184-60E3FAA2CD39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{899ACE29-B236-4779-9184-60E3FAA2CD39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{899ACE29-B236-4779-9184-60E3FAA2CD39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

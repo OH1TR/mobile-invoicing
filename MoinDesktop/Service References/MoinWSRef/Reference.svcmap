@@ -19,13 +19,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:2795/Service.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:50761/Moin.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service.xsd" MetadataType="Schema" ID="f8a613f3-3026-4838-86d6-4e675f35ee0b" SourceId="1" SourceUrl="http://localhost:2795/Service.svc?xsd=xsd0" />
-    <MetadataFile FileName="MoinWS.wsdl" MetadataType="Wsdl" ID="d6f8cda4-3091-4bc8-81f8-0b097ee05e21" SourceId="1" SourceUrl="http://localhost:2795/Service.svc?wsdl" />
-    <MetadataFile FileName="Service1.xsd" MetadataType="Schema" ID="16a8cc83-496d-4098-bc56-e9e7a029c054" SourceId="1" SourceUrl="http://localhost:2795/Service.svc?xsd=xsd2" />
-    <MetadataFile FileName="Service2.xsd" MetadataType="Schema" ID="5d0933ef-411f-441d-b90c-4bf48a732bf2" SourceId="1" SourceUrl="http://localhost:2795/Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="Moin.xsd" MetadataType="Schema" ID="073c5349-f7e8-46ca-ada4-9c657df8a74d" SourceId="1" SourceUrl="http://localhost:50761/Moin.svc?xsd=xsd2" />
+    <MetadataFile FileName="Moin1.xsd" MetadataType="Schema" ID="f27d44ee-abb0-4340-bf00-4e6aa0336407" SourceId="1" SourceUrl="http://localhost:50761/Moin.svc?xsd=xsd1" />
+    <MetadataFile FileName="MoinWS1.wsdl" MetadataType="Wsdl" ID="2c8bf303-adfa-4e63-b5a2-e09be884b954" SourceId="1" SourceUrl="http://localhost:50761/Moin.svc?wsdl" />
+    <MetadataFile FileName="Moin2.xsd" MetadataType="Schema" ID="3beff43c-46ea-4575-862a-55a7f9dda235" SourceId="1" SourceUrl="http://localhost:50761/Moin.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

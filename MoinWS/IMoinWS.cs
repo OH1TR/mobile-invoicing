@@ -9,14 +9,18 @@ using MoinClasses.Tables;
 
 [ServiceContract]
 public interface IMoinWS
-{
+{    
     [OperationContract]
+    [WebGet(
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "GetCurrentCustomer")]
     Customers GetCurrentCustomer();
 
     [OperationContract]
     Customers[] GetCustomers();
 
     [OperationContract]
-    Users[] GetUsers(string customerID);
+    Users[] GetUsers(string customerID);    
 }
 

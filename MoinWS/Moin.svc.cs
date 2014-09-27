@@ -7,6 +7,8 @@ using MoinClasses;
 using MoinClasses.Tables;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
+using System.ServiceModel;
+using System.ServiceModel.Web;
 
 namespace MoinWS
 {
@@ -14,6 +16,7 @@ namespace MoinWS
     //[AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class MoinWS : IMoinWS
     {
+            
         public Customers GetCurrentCustomer()
         {
             using (MoanServiceContext sc = new MoanServiceContext())

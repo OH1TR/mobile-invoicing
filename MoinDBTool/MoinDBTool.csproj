@@ -57,13 +57,19 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MoinClasses\MoinClasses.csproj">
       <Project>{394d57e0-2943-4701-bd13-7137bc11b543}</Project>
       <Name>MoinClasses</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TSGenerator\TSGenerator.csproj">
+      <Project>{899ace29-b236-4779-9184-60e3faa2cd39}</Project>
+      <Name>TSGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
