@@ -1,4 +1,7 @@
-﻿var InvoiceApp = angular.module('InvoiceApp', ['ngRoute']);
+﻿/// <reference path="../Scripts/typings/jquery/jquery.d.ts"/>
+/// <reference path="../Scripts/typings/angularjs/angular.d.ts"/>
+/// <reference path="../Scripts/Classes.ts"/>
+var InvoiceApp = angular.module('InvoiceApp', ['ngRoute']);
 
 InvoiceApp.config(function ($routeProvider) {
     $routeProvider.when('/', {
@@ -10,11 +13,6 @@ InvoiceApp.config(function ($routeProvider) {
         templateUrl: 'Pages/customers.html',
         controller: 'customersController'
     });
-});
-
-InvoiceApp.controller('CustomersCtrl', function ($scope) {
-    $scope.customer = null;
-    $scope.show = false;
 });
 
 InvoiceApp.controller('customersController', function ($scope) {

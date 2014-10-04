@@ -1,6 +1,6 @@
-﻿/// <reference path="./typings/jquery/jquery.d.ts"/> 
-/// <reference path="./typings/angularjs/angular.d.ts"/>
-/// <reference path="Classes.ts"/>
+﻿/// <reference path="../Scripts/typings/jquery/jquery.d.ts"/> 
+/// <reference path="../Scripts/typings/angularjs/angular.d.ts"/>
+/// <reference path="../Scripts/Classes.ts"/>
 
 
 function login() {
@@ -27,3 +27,5 @@ function login() {
         });
 
 }
+
+

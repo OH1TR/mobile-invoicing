@@ -30,11 +30,28 @@ namespace TSGenerator
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("/// <reference path=\"./typings/jquery/jquery.d.ts\"/>\r\n\r\nclass utils {\r\n    public" +
-                    " static CopyProperties(source:any, target:any):void {\r\n        for(var prop in s" +
-                    "ource){\r\n                target[prop] = source[prop];\r\n        }\r\n    }\r\n}\r\n\r\n");
+            this.Write("/// <reference path=\"./typings/jquery/jquery.d.ts\"/>\r\n\r\n");
             
-            #line 19 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 11 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+ // Print warning to output file. THIS FILE IS NOT GENERATED FILE! 
+            
+            #line default
+            #line hidden
+            this.Write(@"// *****************************************************
+// ********This is generated file, do not edit! ********
+// *****************************************************
+
+class utils {
+    public static CopyProperties(source:any, target:any):void {
+        for(var prop in source){
+                target[prop] = source[prop];
+        }
+    }
+}
+
+");
+            
+            #line 24 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
  
 	Assembly moinClasses = typeof(Customers).Assembly;
 	foreach (var i in from c in moinClasses.GetTypes() where c.FullName.StartsWith("MoinClasses.Tables.") select c)
@@ -45,14 +62,14 @@ namespace TSGenerator
             #line hidden
             this.Write("\tclass ");
             
-            #line 24 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 29 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
             #line hidden
             this.Write("\r\n\t{\r\n");
             
-            #line 26 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 31 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 		foreach(var p in i.GetProperties())
 		{
@@ -65,14 +82,14 @@ namespace TSGenerator
             #line hidden
             this.Write("\t\t");
             
-            #line 32 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 37 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Name));
             
             #line default
             #line hidden
             this.Write(": string;\r\n");
             
-            #line 33 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 38 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 			}
         }
@@ -81,9 +98,38 @@ namespace TSGenerator
             #line default
             #line hidden
             this.Write("\r\n\t\tconstructor(source) \r\n\t\t{\r\n\t\t\tutils.CopyProperties(source,this);\r\n\t\t}\r\n\t}\r\n\r\n" +
-                    "");
+                    "\tfunction ");
             
-            #line 44 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 49 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
+            
+            #line default
+            #line hidden
+            this.Write("ArrayFromJSON(json : Object[]) : ");
+            
+            #line 49 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
+            
+            #line default
+            #line hidden
+            this.Write("[]\r\n\t{\r\n\t\tvar retval: ");
+            
+            #line 51 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
+            
+            #line default
+            #line hidden
+            this.Write("[] = [];\r\n\t\tvar len = json.length;\r\n\t\tfor (var i = 0; i < len; i++)   \r\n\t\t\tretval" +
+                    ".push(new ");
+            
+            #line 54 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
+            
+            #line default
+            #line hidden
+            this.Write("(json[i]));\r\n\t\treturn (retval) ;\r\n\t}\r\n\r\n");
+            
+            #line 58 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 	}
 

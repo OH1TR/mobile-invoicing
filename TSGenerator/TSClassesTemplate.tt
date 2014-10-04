@@ -8,6 +8,11 @@
 <#@ output extension=".txt" #>
 /// <reference path="./typings/jquery/jquery.d.ts"/>
 
+<# // Print warning to output file. THIS FILE IS NOT GENERATED FILE! #>
+// *****************************************************
+// ********This is generated file, do not edit! ********
+// *****************************************************
+
 class utils {
     public static CopyProperties(source:any, target:any):void {
         for(var prop in source){
@@ -39,6 +44,15 @@ class utils {
 		{
 			utils.CopyProperties(source,this);
 		}
+	}
+
+	function <#= i.Name #>ArrayFromJSON(json : Object[]) : <#= i.Name #>[]
+	{
+		var retval: <#= i.Name #>[] = [];
+		var len = json.length;
+		for (var i = 0; i < len; i++)   
+			retval.push(new <#= i.Name #>(json[i]));
+		return (retval) ;
 	}
 
 <#

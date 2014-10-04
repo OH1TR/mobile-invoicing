@@ -15,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinServer", "MoinServer\MoinServer.csproj", "{9E0E1BF0-B69C-4736-A6FC-03FC24938F3C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoinWS", "MoinWS\MoinWS.csproj", "{FA9B01FF-C453-4B57-BAFC-7D20421EC4F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{899ACE29-B236-4779-9184-60E3FAA2CD39} = {899ACE29-B236-4779-9184-60E3FAA2CD39}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TSGenerator", "TSGenerator\TSGenerator.csproj", "{899ACE29-B236-4779-9184-60E3FAA2CD39}"
 EndProject

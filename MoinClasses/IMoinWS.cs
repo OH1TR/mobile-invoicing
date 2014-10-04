@@ -18,6 +18,10 @@ public interface IMoinWS
     Customers GetCurrentCustomer();
 
     [OperationContract]
+    [WebGet(
+       RequestFormat = WebMessageFormat.Json,
+       ResponseFormat = WebMessageFormat.Json,
+       UriTemplate = "GetCustomers")]
     Customers[] GetCustomers();
 
     [OperationContract]

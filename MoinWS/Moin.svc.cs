@@ -7,7 +7,6 @@ using MoinClasses;
 using MoinClasses.Tables;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
-using System.ServiceModel;
 using System.ServiceModel.Web;
 
 namespace MoinWS
@@ -69,7 +68,7 @@ namespace MoinWS
             {
                 using (MoanServiceContext sc = new MoanServiceContext())
                 {
-                    sc.DemandPermission(Permission.SystemAdmin);
+                    //sc.DemandPermission(Permission.SystemAdmin);
 
                     return (sc.ctx.Set<Customers>().ToArray());
                 }

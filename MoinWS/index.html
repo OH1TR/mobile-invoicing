@@ -3,17 +3,18 @@
 <head>
     <script src="/Scripts/jquery-2.1.1.js"></script>
     <script src="/Scripts/Classes.js"></script>
-    <script src="/Scripts/Main.js"></script>
     <script src="/Scripts/angular.js"></script>
     <script src="/Scripts/angular-route.js"></script>
-    <script src="/Scripts/Controllers.js"></script>
+    <script src="/src/Main.js"></script>
+    <script src="/src/Controllers.js"></script>
     <title></title>
 </head>
-<body onload="pageLoaded()" ng-controller="CustomersCtrl">
+<body onload="pageLoaded()">
     <header>
         <ul ng-show="show" class="nav navbar-nav navbar-right">
             <li><a href="#"><i class="fa fa-home"></i> Login</a></li>
-            <li><a href="#home"><i class="fa fa-shield"></i> Home</a></li>            
+            <li><a href="#home"><i class="fa fa-shield"></i> Home</a></li>  
+            <li><a href="#customers"><i class="fa fa-shield"></i> Customers</a></li>           
         </ul>
     </header>
 
