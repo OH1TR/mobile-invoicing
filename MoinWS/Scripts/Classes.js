@@ -7,31 +7,43 @@ var utils = (function () {
     }
     utils.CopyProperties = function (source, target) {
         for (var prop in source) {
-            target[prop] = source[prop];
+            if ((prop != 'RowState') && (prop != 'original'))
+                target[prop] = source[prop];
         }
     };
     return utils;
 })();
 
-var MoinClassesBase = (function () {
-    function MoinClassesBase(source) {
-        utils.CopyProperties(source, this);
-    }
-    return MoinClassesBase;
-})();
-
-function MoinClassesBaseArrayFromJSON(json) {
-    var retval = [];
-    var len = json.length;
-    for (var i = 0; i < len; i++)
-        retval.push(new MoinClassesBase(json[i]));
-    return (retval);
-}
-
 var Permissions = (function () {
     function Permissions(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    Permissions.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    Permissions.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    Permissions.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return Permissions;
 })();
 
@@ -45,8 +57,34 @@ function PermissionsArrayFromJSON(json) {
 
 var PermissionsInRoles = (function () {
     function PermissionsInRoles(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    PermissionsInRoles.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    PermissionsInRoles.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    PermissionsInRoles.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return PermissionsInRoles;
 })();
 
@@ -60,8 +98,34 @@ function PermissionsInRolesArrayFromJSON(json) {
 
 var Roles = (function () {
     function Roles(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    Roles.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    Roles.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    Roles.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return Roles;
 })();
 
@@ -75,8 +139,34 @@ function RolesArrayFromJSON(json) {
 
 var UsersInRoles = (function () {
     function UsersInRoles(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    UsersInRoles.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    UsersInRoles.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    UsersInRoles.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return UsersInRoles;
 })();
 
@@ -90,8 +180,34 @@ function UsersInRolesArrayFromJSON(json) {
 
 var Customers = (function () {
     function Customers(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    Customers.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    Customers.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    Customers.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return Customers;
 })();
 
@@ -103,25 +219,36 @@ function CustomersArrayFromJSON(json) {
     return (retval);
 }
 
-var MoinRowState = (function () {
-    function MoinRowState(source) {
-        utils.CopyProperties(source, this);
-    }
-    return MoinRowState;
-})();
-
-function MoinRowStateArrayFromJSON(json) {
-    var retval = [];
-    var len = json.length;
-    for (var i = 0; i < len; i++)
-        retval.push(new MoinRowState(json[i]));
-    return (retval);
-}
-
 var Users = (function () {
     function Users(source) {
-        utils.CopyProperties(source, this);
+        if (typeof source === 'undefined') {
+            this.ID = generateUUID();
+            this.original = null;
+        } else {
+            utils.CopyProperties(source, this);
+            this.original = source;
+        }
     }
+    Users.prototype.GetRowState = function () {
+        if (this.original == null)
+            return (1);
+        for (var prop in this.original) {
+            if (prop != 'original' && prop != 'RowState' && this[prop] !== this.original[prop])
+                return (2);
+        }
+        return (0);
+    };
+
+    Users.prototype.RevertChanges = function () {
+        utils.CopyProperties(this.original, this);
+    };
+
+    Users.prototype.ApplyChanges = function () {
+        if (this.original == null)
+            this.original = new Object();
+
+        utils.CopyProperties(this, this.original);
+    };
     return Users;
 })();
 
@@ -173,5 +300,18 @@ var IMoin;
         });
     }
     IMoin.GetUsers = GetUsers;
+
+    function UpdateCustomer(customer, callback, scope) {
+        $.getJSON('Moin.svc/UpdateCustomer?customer=' + customer + '', function (result, status) {
+            var o = result;
+            if (typeof scope === 'undefined')
+                callback();
+            else
+                scope.$apply(function () {
+                    callback();
+                });
+        });
+    }
+    IMoin.UpdateCustomer = UpdateCustomer;
 })(IMoin || (IMoin = {}));
 //# sourceMappingURL=Classes.js.map

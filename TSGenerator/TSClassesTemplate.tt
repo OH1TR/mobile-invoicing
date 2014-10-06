@@ -15,15 +15,16 @@
 
 class utils {
     public static CopyProperties(source:any, target:any):void {
-        for(var prop in source){
-                target[prop] = source[prop];
+        for (var prop in source) {
+                if((prop != 'RowState') && (prop != 'original'))
+                    target[prop] = source[prop];
         }
     }
 }
 
 <# 
 	Assembly moinClasses = typeof(Customers).Assembly;
-	foreach (var i in from c in moinClasses.GetTypes() where c.FullName.StartsWith("MoinClasses.Tables.") select c)
+	foreach (var i in from c in moinClasses.GetTypes() where c.FullName.StartsWith("MoinClasses.Tables.") && c.BaseType.FullName=="MoinClasses.Tables.MoinClassesBase" select c)
 	{
 #>
 	class <#= i.Name #>
@@ -33,17 +34,55 @@ class utils {
 		{
 			if(p.PropertyType.FullName=="System.String")
 			{
- 
 #>		<#= p.Name #>: string;
 <#
 			}
+			if(p.PropertyType.FullName.StartsWith("System.Int")||p.PropertyType.FullName=="MoinClasses.Tables.MoinRowState")
+			{
+#>		<#= p.Name #>: number;
+<#
+			}
+
         }
 #>
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function <#= i.Name #>ArrayFromJSON(json : Object[]) : <#= i.Name #>[]

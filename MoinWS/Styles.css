@@ -1,0 +1,4 @@
+﻿
+table.editfield-table {height:auto;}
+table.editfield-table tr td:first-child {width:200px;}
+table.editfield-table tr td:last-child {width:400px;}

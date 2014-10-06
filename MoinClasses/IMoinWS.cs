@@ -19,12 +19,19 @@ public interface IMoinWS
 
     [OperationContract]
     [WebGet(
-       RequestFormat = WebMessageFormat.Json,
-       ResponseFormat = WebMessageFormat.Json,
-       UriTemplate = "GetCustomers")]
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json)]
     Customers[] GetCustomers();
 
     [OperationContract]
-    Users[] GetUsers(string customerID);    
+    Users[] GetUsers(string customerID);
+
+    [OperationContract]
+    [WebInvoke(
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        Method = "POST",
+        UriTemplate = "UpdateCustomer")]
+    void UpdateCustomer(Customers customer);
 }
 

@@ -1,7 +1,37 @@
-﻿<div ng-controller="customersController">
-    <ul>
-        <li ng-repeat="customer in customers">
-            {{customer.ID}}{{customer.Name}}
-        </li>
-    </ul>
+﻿<div ng-controller="customersController" class="container-fluid" id="customerView">
+    <div class="row">
+        <div class="col-md-3">
+            <h2>Customers</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <select size="30" ng-model="current" ng-options="customer.Name for customer in customers" class="form-control"></select>
+        </div>
+        <div class="col-md-7 form-group">
+            <button class="btn btn-default" type="button" onclick="addNew('customerView')">
+                <span class="glyphicon glyphicon-plus"></span>
+                Add
+            </button>
+
+            <button class="btn btn-default" type="button" onclick="deleteCurrent('customerView')">
+                <span class="glyphicon glyphicon-floppy-remove"></span>
+                Remove
+            </button>
+
+            <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0" onclick="saveCurrent('customerView')">
+                <span class="glyphicon glyphicon-floppy-save"></span>
+                Save
+            </button>
+
+            <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0" onclick="revertCurrent('customerView')">
+                <span class="glyphicon glyphicon-floppy-remove"></span>
+                Revert changes
+            </button>
+            
+    <br /><br />
+    <label>Name</label>
+    <input type="text" ng-model="current.Name" class="form-control " />
+</div>
+    </div>
 </div>

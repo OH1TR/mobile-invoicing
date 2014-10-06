@@ -23,6 +23,9 @@ namespace TSGenerator
             if (s == "String")
                 s = "string";
 
+            if (s.Contains("MoinRowState"))
+                s = "number";
+
             if (s.StartsWith("ccc"))
                 s = s.Substring(s.LastIndexOf('.'), s.Length - s.LastIndexOf('.'));
 
@@ -41,6 +44,7 @@ namespace TSGenerator
             foreach (MethodInfo i in mi)
             {
                 bool separator = false;
+                bool voidReturn=(i.ReturnType.Name=="Void");
 
                 var paras =i.GetParameters();
 
@@ -58,7 +62,10 @@ namespace TSGenerator
                 if (separator)
                     sb.Append(",");
 
-                sb.Append("callback : (result : " + TypeToTSDef(i.ReturnType, true) + ") => any,scope? : any)\r\n{");
+                if (voidReturn)
+                    sb.Append("callback : () => any,scope? : any)\r\n{");
+                else
+                    sb.Append("callback : (result : " + TypeToTSDef(i.ReturnType, true) + ") => any,scope? : any)\r\n{");
                 sb.Append(@"
     $.getJSON('Moin.svc/"+i.Name);
 
@@ -91,11 +98,11 @@ namespace TSGenerator
                     sb.Append("var o=result");
                 sb.Append(@"
             if (typeof scope === 'undefined')            
-                callback(o);
+                callback("+(voidReturn ? "" :"o")+@");
             else
                 scope.$apply(
                     function () { 
-                        callback(o);
+                        callback(" + (voidReturn ? "" : "o") + @");
                     });
             
         });
@@ -109,7 +116,6 @@ namespace TSGenerator
 
         static void Main(string[] args)
         {
-
             string classesProjectDir = args[0];
             string outputFilePath = args[1];
 

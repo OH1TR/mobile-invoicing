@@ -8,6 +8,7 @@ using MoinClasses.Tables;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
+using System.Data;
 
 namespace MoinWS
 {
@@ -18,10 +19,18 @@ namespace MoinWS
             
         public Customers GetCurrentCustomer()
         {
-            using (MoanServiceContext sc = new MoanServiceContext())
+            try
             {
-                return (sc.CurrentCustomer);
+                using (MoanServiceContext sc = new MoanServiceContext())
+                {
+                    return (sc.CurrentCustomer);
+                }
             }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+            return (null);
         }
 
         public Users[] GetUsers(string customerID)
@@ -80,6 +89,35 @@ namespace MoinWS
             return (null);
         }
 
+
+        public void UpdateCustomer(Customers customer)
+        {
+            try
+            {
+                using (MoanServiceContext sc = new MoanServiceContext())
+                {
+                    switch (customer.RowState)
+                    {
+                        case MoinRowState.New:
+                            sc.ctx.Customers.Add(customer);
+                            break;
+                        case MoinRowState.Updated:
+                            sc.ctx.Customers.Attach(customer);
+                            sc.ctx.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+                            break;
+                        case MoinRowState.Deleted:
+                            sc.ctx.Customers.Attach(customer);
+                            sc.ctx.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
+                            break;
+                    }
+                    sc.ctx.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+        }
 
         /* function template
             public x[] x()

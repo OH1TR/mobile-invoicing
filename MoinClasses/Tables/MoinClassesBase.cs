@@ -9,7 +9,7 @@ using System.Runtime.Serialization;
 
 namespace MoinClasses.Tables
 {
-    public enum MoinRowState { New, Updated, Deleted, None };
+    public enum MoinRowState { Unchanged, New, Updated, Deleted };
 
     [DataContract]
     public abstract class MoinClassesBase
@@ -26,6 +26,6 @@ namespace MoinClasses.Tables
 
         [NotMapped]
         [DataMember]
-        public MoinRowState RowState;
+        public MoinRowState RowState { get; set; }
     }
 }

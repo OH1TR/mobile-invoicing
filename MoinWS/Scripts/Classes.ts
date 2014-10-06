@@ -6,40 +6,56 @@
 
 class utils {
     public static CopyProperties(source:any, target:any):void {
-        for(var prop in source){
-                target[prop] = source[prop];
+        for (var prop in source) {
+                if((prop != 'RowState') && (prop != 'original'))
+                    target[prop] = source[prop];
         }
     }
 }
-
-	class MoinClassesBase
-	{
-		ID: string;
-
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
-		}
-	}
-
-	function MoinClassesBaseArrayFromJSON(json : Object[]) : MoinClassesBase[]
-	{
-		var retval: MoinClassesBase[] = [];
-		var len = json.length;
-		for (var i = 0; i < len; i++)   
-			retval.push(new MoinClassesBase(json[i]));
-		return (retval) ;
-	}
 
 	class Permissions
 	{
 		ID: string;
 		Name: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function PermissionsArrayFromJSON(json : Object[]) : Permissions[]
@@ -56,11 +72,45 @@ class utils {
 		ID: string;
 		PermissionsID: string;
 		RolesID: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function PermissionsInRolesArrayFromJSON(json : Object[]) : PermissionsInRoles[]
@@ -76,11 +126,45 @@ class utils {
 	{
 		ID: string;
 		Name: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function RolesArrayFromJSON(json : Object[]) : Roles[]
@@ -97,11 +181,45 @@ class utils {
 		ID: string;
 		UsersID: string;
 		RolesID: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function UsersInRolesArrayFromJSON(json : Object[]) : UsersInRoles[]
@@ -117,11 +235,45 @@ class utils {
 	{
 		ID: string;
 		Name: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function CustomersArrayFromJSON(json : Object[]) : Customers[]
@@ -133,35 +285,51 @@ class utils {
 		return (retval) ;
 	}
 
-	class MoinRowState
-	{
-
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
-		}
-	}
-
-	function MoinRowStateArrayFromJSON(json : Object[]) : MoinRowState[]
-	{
-		var retval: MoinRowState[] = [];
-		var len = json.length;
-		for (var i = 0; i < len; i++)   
-			retval.push(new MoinRowState(json[i]));
-		return (retval) ;
-	}
-
 	class Users
 	{
 		ID: string;
 		CustomerID: string;
 		Username: string;
 		PasswordHash: string;
+		RowState: number;
 
-		constructor(source) 
-		{
-			utils.CopyProperties(source,this);
+		original : any;
+
+		constructor(source? :any) 
+        {
+            if (typeof source === 'undefined') {
+                this.ID = generateUUID();
+                this.original = null;
+            }
+            else {
+                utils.CopyProperties(source, this);
+                this.original = source;
+            }
 		}
+
+		GetRowState() : number
+		{
+			if(this.original==null)
+				return(1);
+			for(var prop in this.original){
+				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+					return(2);
+			}
+		    return(0);
+		}
+
+		RevertChanges() 
+		{
+			utils.CopyProperties(this.original,this);
+		}
+
+        ApplyChanges() {
+            if (this.original == null)
+                this.original = new Object();
+
+            utils.CopyProperties(this, this.original);
+        }
+
 	}
 
 	function UsersArrayFromJSON(json : Object[]) : Users[]
@@ -220,6 +388,23 @@ export function GetUsers(customerID:string,callback : (result : Users[]) => any,
                 scope.$apply(
                     function () { 
                         callback(o);
+                    });
+            
+        });
+}
+
+export function UpdateCustomer(customer:Customers,callback : () => any,scope? : any)
+{
+    $.getJSON('Moin.svc/UpdateCustomer?customer='+customer+'',
+        function (result, status) 
+        {
+            var o=result
+            if (typeof scope === 'undefined')            
+                callback();
+            else
+                scope.$apply(
+                    function () { 
+                        callback();
                     });
             
         });
