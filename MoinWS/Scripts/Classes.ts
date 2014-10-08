@@ -393,18 +393,18 @@ export function GetUsers(customerID:string,callback : (result : Users[]) => any,
         });
 }
 
-export function UpdateCustomer(customer:Customers,callback : () => any,scope? : any)
+export function UpdateCustomer(customer:Customers,callback : (result : string) => any,scope? : any)
 {
     $.getJSON('Moin.svc/UpdateCustomer?customer='+customer+'',
         function (result, status) 
         {
             var o=result
             if (typeof scope === 'undefined')            
-                callback();
+                callback(o);
             else
                 scope.$apply(
                     function () { 
-                        callback();
+                        callback(o);
                     });
             
         });

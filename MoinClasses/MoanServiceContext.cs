@@ -25,12 +25,14 @@ namespace MoinClasses
             MySqlConnection connection = new MySqlConnection(connectionString);
             ctx = new MoinDbContext(connection, false);
 
+            ctx.Database.Log = Log.WriteLine;
+
             object propObj;
             OperationContext.Current.IncomingMessageProperties.TryGetValue(HttpRequestMessageProperty.Name, out propObj);
             HttpRequestMessageProperty reqProp = (HttpRequestMessageProperty)propObj;
             string headerAuth = reqProp.Headers["Authorization"];
-            if(!ProcessAuthenticationHeader(headerAuth))
-            {                
+            if (!ProcessAuthenticationHeader(headerAuth))
+            {
                 //OperationContext.Current.OutgoingMessageProperties.Add("WWW-Authenticate", "Basic realm=\"nmrs_m7VKmomQ2YM3:\"");
                 throw new Exception("Authentication failed");
             }
@@ -38,13 +40,14 @@ namespace MoinClasses
 
         bool ProcessAuthenticationHeader(string header)
         {
-            
+
             if (header == null)
                 return (false);
 
             header = header.Trim();
             if (header.IndexOf("Basic", 0) != 0)
             {
+                Log.WriteLine("auth:header.IndexOf(\"Basic\", 0) != 0");
                 return (false);
             }
 
@@ -54,7 +57,12 @@ namespace MoinClasses
             string s = System.Text.Encoding.GetEncoding(28591).GetString(decodedBytes);
 
             string[] userPass = s.Split(new char[] { ':' });
-             
+
+            if(userPass.Length<2)
+            {
+                Log.WriteLine("auth:userPass.Length<2");
+                return (false);
+            }
             string username = userPass[0];
             string password = userPass[1];
 
@@ -67,57 +75,59 @@ namespace MoinClasses
                 _roles = roles;
                 CurrentCustomer = customer;
                 return (true);
-            }                
-            return (false);                    
+            }
+            Log.WriteLine("auth:ProcessAuthenticationHeader:return (false)");
+            return (false);
         }
 
         private bool AuthenticateUser(string username, string password, out string[] roles, out Customers customer)
         {
             roles = null;
             customer = null;
-   
-            try
+
+
+            string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
+                using (MoinDbContext ctx = new MoinDbContext(connection, false))
+                {                    
+                    var users = from u in ctx.Users
+                                where u.Username == username
+                                select u;
+                    Users user = users.FirstOrDefault();
 
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
-                {
-                    using (MoinDbContext ctx = new MoinDbContext(connection, false))
+                    if (user == null || user.PasswordHash == null || user.PasswordHash.Length < 74)
                     {
-                        var users = from u in ctx.Users
+                        Log.WriteLine("auth: user == null || user.PasswordHash == null || user.PasswordHash.Length < 74");
+                        return (false);
+                    }
+
+                    System.Security.Cryptography.SHA256Managed sha = new System.Security.Cryptography.SHA256Managed();
+
+                    byte[] hashPass = sha.ComputeHash(System.Text.UnicodeEncoding.Unicode.GetBytes(user.PasswordHash.Substring(0, 10) + password));
+
+                    if (user.PasswordHash.Substring(10) == BitConverter.ToString(hashPass).Replace("-", String.Empty))
+                    {
+                        customer = user.Customer;
+
+                        var perms = from u in ctx.Users
                                     where u.Username == username
-                                    select u;
-                        Users user = users.FirstOrDefault();
-
-                        if (user == null || user.PasswordHash == null || user.PasswordHash.Length < 74)
-                            return (false);
-
-                        System.Security.Cryptography.SHA256Managed sha = new System.Security.Cryptography.SHA256Managed();
-
-                        byte[] hashPass = sha.ComputeHash(System.Text.UnicodeEncoding.Unicode.GetBytes(user.PasswordHash.Substring(0, 10) + password));
-
-                        if (user.PasswordHash.Substring(10) == BitConverter.ToString(hashPass).Replace("-", String.Empty))
-                        {
-                            customer = user.Customer;
-
-                            var perms = from u in ctx.Users
-                                        where u.Username == username
-                                        join ur in ctx.UsersInRoles on u equals ur.User
-                                        join r in ctx.Roles on ur.Role equals r
-                                        join pr in ctx.PermissionsInRoles on r equals pr.Role
-                                        join p in ctx.Permissions on pr.Permission equals p
-                                        select p.Name;
-                            roles = perms.ToArray();
-                            return (true);
-                        }
+                                    join ur in ctx.UsersInRoles on u equals ur.User
+                                    join r in ctx.Roles on ur.Role equals r
+                                    join pr in ctx.PermissionsInRoles on r equals pr.Role
+                                    join p in ctx.Permissions on pr.Permission equals p
+                                    select p.Name;
+                        roles = perms.ToArray();
+                        return (true);
+                    }
+                    else
+                    {
+                        Log.WriteLine("auth:user.PasswordHash.Substring(10) == BitConverter.ToString(hashPass).Replace(\"-\", String.Empty)");
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                Log.Exception(ex);
-                return (false);
-            }
+            Log.WriteLine("auth:AuthenticateUser:return (false)");
             return (false);
         }
 

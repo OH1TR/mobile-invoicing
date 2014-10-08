@@ -29,7 +29,7 @@ InvoiceApp.config(function ($routeProvider) {
 InvoiceApp.controller('loginController', function ($scope) {
     var username: string = localStorage.getItem("username");
     var password: string = localStorage.getItem("password");
-    if (username != null) {
+    if (username != null && username!='undefined') {
         $.ajaxSetup({
             headers: {
                 'Authorization': "Basic " + btoa(username + ":" + password)

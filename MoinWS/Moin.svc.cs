@@ -79,7 +79,7 @@ namespace MoinWS
                 {
                     //sc.DemandPermission(Permission.SystemAdmin);
 
-                    return (sc.ctx.Set<Customers>().ToArray());
+                    return ((from c in sc.ctx.Customers orderby c.Name select c).ToArray());
                 }
             }
             catch (Exception e)
@@ -90,12 +90,21 @@ namespace MoinWS
         }
 
 
-        public void UpdateCustomer(Customers customer)
+        public string UpdateCustomer(Customers customer)
         {
             try
-            {
+            {            
+                if (customer==null)
+                    Log.WriteLine("Customer is null");
+
+                if (customer.ID == null)
+                    Log.WriteLine("customer.ID is null");
+
+                Log.WriteLine(":" + customer.ID.ToString() + ":");
                 using (MoanServiceContext sc = new MoanServiceContext())
                 {
+                    sc.ctx.Database.Log = Log.WriteLine;
+
                     switch (customer.RowState)
                     {
                         case MoinRowState.New:
@@ -112,11 +121,13 @@ namespace MoinWS
                     }
                     sc.ctx.SaveChanges();
                 }
+                 
             }
             catch (Exception e)
             {
                 Log.Exception(e);
             }
+            return ("");
         }
 
         /* function template

@@ -4,3 +4,13 @@ obj
 /*.suo
 /Published
 /id_rsa
+/MoinWS/Bin/EntityFramework.dll
+/MoinWS/Bin/EntityFramework.dll
+/MoinWS/Bin/EntityFramework.xml
+/MoinWS/Bin/mysql.data.dll
+/MoinWS/Bin/mysql.data.entity.EF6.dll
+/MoinWS/Scripts/Classes.js
+/MoinWS/Scripts/Classes.js.map
+/MoinWS/src/*.map
+/MoinWS/src/Controllers.js
+/MoinWS/src/Main.js

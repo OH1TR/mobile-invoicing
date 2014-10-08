@@ -32,6 +32,6 @@ public interface IMoinWS
         ResponseFormat = WebMessageFormat.Json,
         Method = "POST",
         UriTemplate = "UpdateCustomer")]
-    void UpdateCustomer(Customers customer);
+    string UpdateCustomer(Customers customer);
 }
 
