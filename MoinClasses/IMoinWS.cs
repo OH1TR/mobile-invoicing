@@ -9,7 +9,7 @@ using MoinClasses.Tables;
 
 [ServiceContract]
 public interface IMoinWS
-{    
+{
     [OperationContract]
     [WebGet(
            RequestFormat = WebMessageFormat.Json,
@@ -24,6 +24,10 @@ public interface IMoinWS
     Customers[] GetCustomers();
 
     [OperationContract]
+    [WebGet(
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "GetUsers?customerID={customerID}")]
     Users[] GetUsers(string customerID);
 
     [OperationContract]
@@ -33,5 +37,27 @@ public interface IMoinWS
         Method = "POST",
         UriTemplate = "UpdateCustomer")]
     string UpdateCustomer(Customers customer);
+
+    [OperationContract]
+    [WebInvoke(
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        Method = "POST",
+        UriTemplate = "UpdateUser")]
+    string UpdateUser(Users customer);
+
+    [OperationContract]
+    [WebGet(
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "GetRoles")]
+    Roles[] GetRoles();
+
+    [OperationContract]
+    [WebGet(
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           UriTemplate = "GetUserRoles?userID={userID}")]
+    UsersInRoles[] GetUserRoles(string userID);
 }
 

@@ -85,6 +85,7 @@
     </Content>
     <Content Include="index.html" />
     <Content Include="Moin.svc" />
+    <Content Include="Pages\users.html" />
     <Content Include="Pages\customers.html" />
     <Content Include="Pages\home.html" />
     <Content Include="Pages\login.html" />

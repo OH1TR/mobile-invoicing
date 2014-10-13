@@ -53,7 +53,7 @@ namespace MoinWS
                     }
                     else
                     {
-                        sc.DemandPermission(Permission.SystemAdmin);
+                        //sc.DemandPermission(Permission.SystemAdmin);
 
                         var users = from u in sc.ctx.Users
                                     where u.CustomerID == customerID
@@ -77,6 +77,7 @@ namespace MoinWS
             {
                 using (MoanServiceContext sc = new MoanServiceContext())
                 {
+                    sc.ctx.Configuration.ProxyCreationEnabled = false;
                     //sc.DemandPermission(Permission.SystemAdmin);
 
                     return ((from c in sc.ctx.Customers orderby c.Name select c).ToArray());
@@ -94,31 +95,10 @@ namespace MoinWS
         {
             try
             {            
-                if (customer==null)
-                    Log.WriteLine("Customer is null");
-
-                if (customer.ID == null)
-                    Log.WriteLine("customer.ID is null");
-
-                Log.WriteLine(":" + customer.ID.ToString() + ":");
                 using (MoanServiceContext sc = new MoanServiceContext())
                 {
                     sc.ctx.Database.Log = Log.WriteLine;
-
-                    switch (customer.RowState)
-                    {
-                        case MoinRowState.New:
-                            sc.ctx.Customers.Add(customer);
-                            break;
-                        case MoinRowState.Updated:
-                            sc.ctx.Customers.Attach(customer);
-                            sc.ctx.Entry(customer).State = System.Data.Entity.EntityState.Modified;
-                            break;
-                        case MoinRowState.Deleted:
-                            sc.ctx.Customers.Attach(customer);
-                            sc.ctx.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
-                            break;
-                    }
+                    sc.ctx.Import(customer);
                     sc.ctx.SaveChanges();
                 }
                  
@@ -128,6 +108,66 @@ namespace MoinWS
                 Log.Exception(e);
             }
             return ("");
+        }
+
+        public string UpdateUser(Users user)
+        {
+            try
+            {
+                using (MoanServiceContext sc = new MoanServiceContext())
+                {
+                    sc.ctx.Database.Log = Log.WriteLine;
+                    sc.ctx.Import(user);
+                    sc.ctx.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }             
+            return ("");
+        }
+
+        public Roles[] GetRoles()
+        {
+               try
+                {
+                    using (MoanServiceContext sc = new MoanServiceContext())
+                    {
+                        sc.ctx.Configuration.ProxyCreationEnabled = false;
+
+                        var roles=from r in sc.ctx.Roles orderby r.Name select r;
+                        Roles[] retval=roles.ToArray();
+                        return (retval);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Log.Exception(e);
+                }
+                return (null);
+        }
+
+        public UsersInRoles[] GetUserRoles(string userID)
+        {
+            try
+            {
+                using (MoanServiceContext sc = new MoanServiceContext())
+                {
+                    var usersInRoles = from u in sc.ctx.Users
+                                where u.ID == userID
+                                join ur in sc.ctx.UsersInRoles on u equals ur.User
+                                select ur;
+
+                    return (usersInRoles.ToArray());
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+            return (null);
         }
 
         /* function template

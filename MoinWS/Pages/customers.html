@@ -24,7 +24,7 @@
                 Save
             </button>
 
-            <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0" onclick="revertCurrent('customerView')">
+            <button class="btn btn-default" type="button" ng-show="current.GetRowState()==2" onclick="revertCurrent('customerView')">
                 <span class="glyphicon glyphicon-floppy-remove"></span>
                 Revert changes
             </button>

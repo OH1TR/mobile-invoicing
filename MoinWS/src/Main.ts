@@ -72,16 +72,6 @@ function addNew(viewref: string) {
 function deleteCurrent(viewref: string) {
     var controllerElement = document.querySelector('#' + viewref);
     var controllerScope = angular.element(controllerElement).scope();
-    controllerScope["current"].RowState = 3;
-    $.ajax({
-        url: controllerScope["SaveMethod"],
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(controllerScope["current"]),
-        dataType: 'json'
-    });
-    var index = controllerScope["customers"].indexOf(controllerScope["current"]);
-    if (index > -1)
-        controllerScope["customers"].splice(index, 1);
+    controllerScope["deleteFunction"]();
     controllerScope.$apply();
 }

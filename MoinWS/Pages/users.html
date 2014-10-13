@@ -1,0 +1,62 @@
+﻿<div ng-controller="usersController" class="container-fluid" id="usersView">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Users</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <select size="30" ng-model="currentCustomer" ng-options="customer.Name for customer in customers" ng-change="customerSelected()" class=" form-control"></select>
+        </div>
+        <div class="col-md-2">
+            <select size="30" ng-model="current" ng-options="user.Username for user in users" class=" form-control" ng-change="userSelected()"></select>
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="form-group">
+                    <button class="btn btn-default" type="button" onclick="addNew('usersView')">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Add
+                    </button>
+
+                    <button class="btn btn-default" type="button" onclick="deleteCurrent('usersView')">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>
+                        Remove
+                    </button>
+
+                    <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0" onclick="saveCurrent('usersView')">
+                        <span class="glyphicon glyphicon-floppy-save"></span>
+                        Save
+                    </button>
+
+                    <button class="btn btn-default" type="button" ng-show="current.GetRowState()==2" onclick="revertCurrent('usersView')">
+                        <span class="glyphicon glyphicon-floppy-remove"></span>
+                        Revert changes
+                    </button>
+
+                    <br /><br />
+                    <label>Username</label>
+                    <input type="text" ng-model="current.Username" class="form-control " />
+                </div>
+            </div>
+            <div class="row">
+                <label>Profiles</label>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label>Selected</label>
+                    <select size="10" ng-model="xselectedRole" ng-options="getRoleName(ur.RolesID) for ur in userRoles | filter:{ Deleted : '!true' } " class=" form-control"></select>
+                </div>
+                <div class="col-md-1 form-group">
+                    <button class="btn btn-default" type="button" ng-click="addProfile()">&lt;</button><br />
+                    <button class="btn btn-default" type="button" ng-click="removeProfile()">&gt;</button>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label>Unselected</label>
+                    <select size="10" ng-model="selectedRole" ng-options="role.Name for role in roles" class=" form-control"></select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

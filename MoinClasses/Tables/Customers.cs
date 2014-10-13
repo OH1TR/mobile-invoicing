@@ -13,6 +13,7 @@ namespace MoinClasses.Tables
     [DataContract]
     public class Customers : MoinClassesBase
     {
+        [MaxLength(36)]
         [DataMember]    
         public override string ID { get; set; }
 

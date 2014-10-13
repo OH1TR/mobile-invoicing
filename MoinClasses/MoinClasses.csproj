@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="IMoinWS.cs" />
     <Compile Include="MoanServiceContext.cs" />
     <Compile Include="Permission.cs" />

@@ -7,7 +7,7 @@
 class utils {
     public static CopyProperties(source:any, target:any):void {
         for (var prop in source) {
-                if((prop != 'RowState') && (prop != 'original'))
+                if((prop != 'RowState') && (prop != 'Original'))
                     target[prop] = source[prop];
         }
     }
@@ -19,26 +19,28 @@ class utils {
 		Name: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -46,14 +48,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -74,26 +76,28 @@ class utils {
 		RolesID: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -101,14 +105,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -128,26 +132,28 @@ class utils {
 		Name: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -155,14 +161,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -183,26 +189,28 @@ class utils {
 		RolesID: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -210,14 +218,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -237,26 +245,28 @@ class utils {
 		Name: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -264,14 +274,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -293,26 +303,28 @@ class utils {
 		PasswordHash: string;
 		RowState: number;
 
-		original : any;
+		Original : any;
+		Deleted : boolean;
 
 		constructor(source? :any) 
         {
+			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
-                this.original = null;
+                this.Original = null;
             }
             else {
                 utils.CopyProperties(source, this);
-                this.original = source;
+                this.Original = source;
             }
 		}
 
 		GetRowState() : number
 		{
-			if(this.original==null)
+			if(this.Original==null)
 				return(1);
-			for(var prop in this.original){
-				if(prop!='original' && prop!='RowState' && this[prop] !== this.original[prop])
+			for(var prop in this.Original){
+				if(prop!='Original' && prop!='RowState' && this[prop] !== this.Original[prop])
 					return(2);
 			}
 		    return(0);
@@ -320,14 +332,14 @@ class utils {
 
 		RevertChanges() 
 		{
-			utils.CopyProperties(this.original,this);
+			utils.CopyProperties(this.Original,this);
 		}
 
         ApplyChanges() {
-            if (this.original == null)
-                this.original = new Object();
+            if (this.Original == null)
+                this.Original = new Object();
 
-            utils.CopyProperties(this, this.original);
+            utils.CopyProperties(this, this.Original);
         }
 
 	}
@@ -399,6 +411,57 @@ export function UpdateCustomer(customer:Customers,callback : (result : string) =
         function (result, status) 
         {
             var o=result
+            if (typeof scope === 'undefined')            
+                callback(o);
+            else
+                scope.$apply(
+                    function () { 
+                        callback(o);
+                    });
+            
+        });
+}
+
+export function UpdateUser(customer:Users,callback : (result : string) => any,scope? : any)
+{
+    $.getJSON('Moin.svc/UpdateUser?customer='+customer+'',
+        function (result, status) 
+        {
+            var o=result
+            if (typeof scope === 'undefined')            
+                callback(o);
+            else
+                scope.$apply(
+                    function () { 
+                        callback(o);
+                    });
+            
+        });
+}
+
+export function GetRoles(callback : (result : Roles[]) => any,scope? : any)
+{
+    $.getJSON('Moin.svc/GetRoles',
+        function (result, status) 
+        {
+            var o=RolesArrayFromJSON(result);
+            if (typeof scope === 'undefined')            
+                callback(o);
+            else
+                scope.$apply(
+                    function () { 
+                        callback(o);
+                    });
+            
+        });
+}
+
+export function GetUserRoles(userID:string,callback : (result : UsersInRoles[]) => any,scope? : any)
+{
+    $.getJSON('Moin.svc/GetUserRoles?userID='+userID+'',
+        function (result, status) 
+        {
+            var o=UsersInRolesArrayFromJSON(result);
             if (typeof scope === 'undefined')            
                 callback(o);
             else
