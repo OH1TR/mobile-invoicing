@@ -21,12 +21,6 @@ namespace MoinClasses
 
         public MoanServiceContext()
         {
-            string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
-            MySqlConnection connection = new MySqlConnection(connectionString);
-            ctx = new MoinDbContext(connection, false);
-
-            ctx.Database.Log = Log.WriteLine;
-
             object propObj;
             OperationContext.Current.IncomingMessageProperties.TryGetValue(HttpRequestMessageProperty.Name, out propObj);
             HttpRequestMessageProperty reqProp = (HttpRequestMessageProperty)propObj;
@@ -36,6 +30,11 @@ namespace MoinClasses
                 //OperationContext.Current.OutgoingMessageProperties.Add("WWW-Authenticate", "Basic realm=\"nmrs_m7VKmomQ2YM3:\"");
                 throw new Exception("Authentication failed");
             }
+
+            string connectionString = ConfigurationManager.AppSettings["SQLConnectionString"];
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            ctx = new MoinDbContext(connection, true);
+            ctx.Database.Log = Log.WriteLine;
         }
 
         bool ProcessAuthenticationHeader(string header)
