@@ -59,5 +59,13 @@ public interface IMoinWS
            ResponseFormat = WebMessageFormat.Json,
            UriTemplate = "GetUserRoles?userID={userID}")]
     UsersInRoles[] GetUserRoles(string userID);
+
+    [OperationContract]
+    [WebInvoke(
+        RequestFormat = WebMessageFormat.Json,
+        ResponseFormat = WebMessageFormat.Json,
+        Method = "POST",
+        UriTemplate = "UpdateUsersInRoles")]
+    string UpdateUsersInRoles(UsersInRoles[] usersInRoles);
 }
 

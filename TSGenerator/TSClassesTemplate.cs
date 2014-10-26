@@ -50,9 +50,39 @@ class utils {
     }
 }
 
+class MoinBase {
+    Original: any;
+    Deleted: boolean;
+
+    GetRowState(): number {
+        if (this.Deleted)
+            return (4);
+
+        if (this.Original == null)
+            return (1);
+        for (var prop in this.Original) {
+            if (prop != 'Original' && prop != 'RowState' && this[prop] !== this.Original[prop])
+                return (2);
+        }
+        return (0);
+    }
+
+    RevertChanges() {
+        utils.CopyProperties(this.Original, this);
+    }
+
+    ApplyChanges() {
+        if (this.Original == null)
+            this.Original = new Object();
+
+        utils.CopyProperties(this, this.Original);
+    }
+}
+
+
 ");
             
-            #line 25 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 55 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
  
 	Assembly moinClasses = typeof(Customers).Assembly;
 	foreach (var i in from c in moinClasses.GetTypes() where c.FullName.StartsWith("MoinClasses.Tables.") && c.BaseType.FullName=="MoinClasses.Tables.MoinClassesBase" select c)
@@ -63,14 +93,14 @@ class utils {
             #line hidden
             this.Write("\tclass ");
             
-            #line 30 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 60 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
             #line hidden
-            this.Write("\r\n\t{\r\n");
+            this.Write(" extends MoinBase\r\n\t{\r\n");
             
-            #line 32 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 62 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 		foreach(var p in i.GetProperties())
 		{
@@ -82,14 +112,14 @@ class utils {
             #line hidden
             this.Write("\t\t");
             
-            #line 37 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 67 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Name));
             
             #line default
             #line hidden
             this.Write(": string;\r\n");
             
-            #line 38 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 68 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 			}
 			if(p.PropertyType.FullName.StartsWith("System.Int")||p.PropertyType.FullName=="MoinClasses.Tables.MoinRowState")
@@ -100,14 +130,14 @@ class utils {
             #line hidden
             this.Write("\t\t");
             
-            #line 42 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 72 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(p.Name));
             
             #line default
             #line hidden
             this.Write(": number;\r\n");
             
-            #line 43 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 73 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 			}
 
@@ -122,6 +152,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -160,21 +191,21 @@ class utils {
 
 	function ");
             
-            #line 90 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 121 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
             #line hidden
             this.Write("ArrayFromJSON(json : Object[]) : ");
             
-            #line 90 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 121 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
             #line hidden
             this.Write("[]\r\n\t{\r\n\t\tvar retval: ");
             
-            #line 92 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 123 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
@@ -182,14 +213,14 @@ class utils {
             this.Write("[] = [];\r\n\t\tvar len = json.length;\r\n\t\tfor (var i = 0; i < len; i++)   \r\n\t\t\tretval" +
                     ".push(new ");
             
-            #line 95 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 126 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(i.Name));
             
             #line default
             #line hidden
             this.Write("(json[i]));\r\n\t\treturn (retval) ;\r\n\t}\r\n\r\n");
             
-            #line 99 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
+            #line 130 "C:\Projects\mobile-invoicing\TSGenerator\TSClassesTemplate.tt"
 
 	}
 

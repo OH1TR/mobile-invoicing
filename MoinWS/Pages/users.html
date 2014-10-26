@@ -24,7 +24,7 @@
                         Remove
                     </button>
 
-                    <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0" onclick="saveCurrent('usersView')">
+                    <button class="btn btn-default" type="button" ng-show="current.GetRowState()>0 || userRolesHasChanges()" onclick="saveCurrent('usersView')">
                         <span class="glyphicon glyphicon-floppy-save"></span>
                         Save
                     </button>

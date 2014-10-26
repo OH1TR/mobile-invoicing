@@ -28,13 +28,13 @@ InvoiceApp.config(function ($routeProvider) {
         })
         .otherwise({
             redirectTo: '/'
-    });
+        });
 });
 
 InvoiceApp.controller('loginController', function ($scope) {
     var username: string = localStorage.getItem("username");
     var password: string = localStorage.getItem("password");
-    if (username != null && username!='undefined') {
+    if (username != null && username != 'undefined') {
         $.ajaxSetup({
             headers: {
                 'Authorization': "Basic " + btoa(username + ":" + password)
@@ -49,7 +49,7 @@ InvoiceApp.controller('loginController', function ($scope) {
                 controllerScope["show"] = true;
                 controllerScope.$apply();
                 window.location.href = "#home";
-            });    
+            });
     }
 });
 
@@ -83,10 +83,10 @@ InvoiceApp.controller('customersController', function ($scope) {
         function (result) {
             $scope.customers = result;
             if ($scope.customers.length > 0)
-                $scope.current = $scope.customers[0]; 
+                $scope.current = $scope.customers[0];
             else
-                $scope.current = null;                
-        },$scope); 
+                $scope.current = null;
+        }, $scope);
 });
 
 InvoiceApp.controller('usersController', function ($scope) {
@@ -131,7 +131,7 @@ InvoiceApp.controller('usersController', function ($scope) {
                     $scope.current = $scope.users[0];
                 else
                     $scope.current = null;
-            },$scope)
+            }, $scope)
         }
 
     IMoin.GetCustomers(
@@ -141,7 +141,7 @@ InvoiceApp.controller('usersController', function ($scope) {
                 $scope.currentCustomer = $scope.customers[0];
             else
                 $scope.currentCustomer = null;
-        }, $scope); 
+        }, $scope);
 
     IMoin.GetRoles(function (result: Roles[]) {
         $scope.roles = result;
@@ -163,14 +163,25 @@ InvoiceApp.controller('usersController', function ($scope) {
                 return;
             }
         }
-            var o: UsersInRoles = new UsersInRoles();
-            o.UsersID = $scope.current.ID;
-            o.RolesID = $scope.selectedRole.ID;
-            $scope.userRoles.push(o);        
+        var o: UsersInRoles = new UsersInRoles();
+        o.UsersID = $scope.current.ID;
+        o.RolesID = $scope.selectedRole.ID;
+        $scope.userRoles.push(o);
     }
 
-        $scope.removeProfile = function () {
+    $scope.removeProfile = function () {
+        if ($scope.xselectedRole.GetRowState() == 1) {
+            for (var i = $scope.userRoles.length - 1; i >= 0; i--) {
+                if ($scope.userRoles[i] === $scope.xselectedRole) {
+                    $scope.userRoles.splice(i, 1);
+                }
+            }
+        }
+        else    
             $scope.xselectedRole.Deleted = true;
+    };
 
-        };
+    $scope.userRolesHasChanges = function () {
+        return (MidleTableHasChanges($scope.userRoles));
+    };
 });

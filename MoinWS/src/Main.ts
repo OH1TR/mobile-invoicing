@@ -75,3 +75,13 @@ function deleteCurrent(viewref: string) {
     controllerScope["deleteFunction"]();
     controllerScope.$apply();
 }
+
+function MidleTableHasChanges(aObjects: MoinBase[]) {
+    var len = aObjects.length;
+    for (var i = 0; i < len; i++) {
+        if (aObjects[i].GetRowState() != 0)
+            return (true);
+    }
+    return (false);
+}
+

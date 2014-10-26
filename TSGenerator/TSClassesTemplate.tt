@@ -22,12 +22,42 @@ class utils {
     }
 }
 
+class MoinBase {
+    Original: any;
+    Deleted: boolean;
+
+    GetRowState(): number {
+        if (this.Deleted)
+            return (4);
+
+        if (this.Original == null)
+            return (1);
+        for (var prop in this.Original) {
+            if (prop != 'Original' && prop != 'RowState' && this[prop] !== this.Original[prop])
+                return (2);
+        }
+        return (0);
+    }
+
+    RevertChanges() {
+        utils.CopyProperties(this.Original, this);
+    }
+
+    ApplyChanges() {
+        if (this.Original == null)
+            this.Original = new Object();
+
+        utils.CopyProperties(this, this.Original);
+    }
+}
+
+
 <# 
 	Assembly moinClasses = typeof(Customers).Assembly;
 	foreach (var i in from c in moinClasses.GetTypes() where c.FullName.StartsWith("MoinClasses.Tables.") && c.BaseType.FullName=="MoinClasses.Tables.MoinClassesBase" select c)
 	{
 #>
-	class <#= i.Name #>
+	class <#= i.Name #> extends MoinBase
 	{
 <#
 		foreach(var p in i.GetProperties())
@@ -51,6 +81,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();

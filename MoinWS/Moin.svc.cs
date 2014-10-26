@@ -170,6 +170,25 @@ namespace MoinWS
             return (null);
         }
 
+        public string UpdateUsersInRoles(UsersInRoles[] usersInRoles)
+        {
+            try
+            {
+                using (MoanServiceContext sc = new MoanServiceContext())
+                {
+                    sc.ctx.Database.Log = Log.WriteLine;
+                    foreach (var i in usersInRoles)
+                        sc.ctx.Import(i);                    
+                    sc.ctx.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Exception(e);
+            }
+            return ("");
+        }
+
         /* function template
             public x[] x()
             {

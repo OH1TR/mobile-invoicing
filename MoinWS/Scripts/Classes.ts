@@ -13,7 +13,37 @@ class utils {
     }
 }
 
-	class Permissions
+class MoinBase {
+    Original: any;
+    Deleted: boolean;
+
+    GetRowState(): number {
+        if (this.Deleted)
+            return (4);
+
+        if (this.Original == null)
+            return (1);
+        for (var prop in this.Original) {
+            if (prop != 'Original' && prop != 'RowState' && this[prop] !== this.Original[prop])
+                return (2);
+        }
+        return (0);
+    }
+
+    RevertChanges() {
+        utils.CopyProperties(this.Original, this);
+    }
+
+    ApplyChanges() {
+        if (this.Original == null)
+            this.Original = new Object();
+
+        utils.CopyProperties(this, this.Original);
+    }
+}
+
+
+	class Permissions extends MoinBase
 	{
 		ID: string;
 		Name: string;
@@ -24,6 +54,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -69,7 +100,7 @@ class utils {
 		return (retval) ;
 	}
 
-	class PermissionsInRoles
+	class PermissionsInRoles extends MoinBase
 	{
 		ID: string;
 		PermissionsID: string;
@@ -81,6 +112,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -126,7 +158,7 @@ class utils {
 		return (retval) ;
 	}
 
-	class Roles
+	class Roles extends MoinBase
 	{
 		ID: string;
 		Name: string;
@@ -137,6 +169,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -182,7 +215,7 @@ class utils {
 		return (retval) ;
 	}
 
-	class UsersInRoles
+	class UsersInRoles extends MoinBase
 	{
 		ID: string;
 		UsersID: string;
@@ -194,6 +227,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -239,7 +273,7 @@ class utils {
 		return (retval) ;
 	}
 
-	class Customers
+	class Customers extends MoinBase
 	{
 		ID: string;
 		Name: string;
@@ -250,6 +284,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -295,7 +330,7 @@ class utils {
 		return (retval) ;
 	}
 
-	class Users
+	class Users extends MoinBase
 	{
 		ID: string;
 		CustomerID: string;
@@ -308,6 +343,7 @@ class utils {
 
 		constructor(source? :any) 
         {
+			super();
 			this.Deleted=false;
             if (typeof source === 'undefined') {
                 this.ID = generateUUID();
@@ -462,6 +498,23 @@ export function GetUserRoles(userID:string,callback : (result : UsersInRoles[]) 
         function (result, status) 
         {
             var o=UsersInRolesArrayFromJSON(result);
+            if (typeof scope === 'undefined')            
+                callback(o);
+            else
+                scope.$apply(
+                    function () { 
+                        callback(o);
+                    });
+            
+        });
+}
+
+export function UpdateUsersInRoles(usersInRoles:UsersInRoles[],callback : (result : string) => any,scope? : any)
+{
+    $.getJSON('Moin.svc/UpdateUsersInRoles?usersInRoles='+usersInRoles+'',
+        function (result, status) 
+        {
+            var o=result
             if (typeof scope === 'undefined')            
                 callback(o);
             else
