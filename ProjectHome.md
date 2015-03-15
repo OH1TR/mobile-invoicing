@@ -1,0 +1,1 @@
+Simple invoicing system for mobile users. Allows collection of data in field and creating invoices in desktop or mobile.
